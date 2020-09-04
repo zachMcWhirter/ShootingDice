@@ -12,7 +12,7 @@ namespace ShootingDice
             // Call roll for "this" object and for the "other" object
             Console.WriteLine("Roll by typing a number between 1 and 6");
             string numberChosen = Console.ReadLine();
-            int myRoll = int.Parse(numberChosen);
+            int myRoll = Int32.Parse(numberChosen);
             int otherRoll = other.Roll();
 
             Console.WriteLine($"{Name} rolls a {myRoll}");

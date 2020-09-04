@@ -17,12 +17,6 @@ namespace ShootingDice
 
             Console.WriteLine("-------------------");
 
-            Player player3 = new Player();
-            player3.Name = "Wilma";
-            player3.Play(player2);
-
-            Console.WriteLine("-------------------");
-
             Player large = new LargeDicePlayer();
             large.Name = "Biggie";
             large.Play(player2);
@@ -43,7 +37,7 @@ namespace ShootingDice
             Console.WriteLine("-------------------");
 
             Player human = new HumanPlayer();
-            human.Name = "HomoSapien";
+            human.Name = "HomoSapien-Sapien";
             human.Play(oneUpper);
 
             Console.WriteLine("-------------------");
@@ -54,16 +48,60 @@ namespace ShootingDice
 
             Console.WriteLine("-------------------");
 
+            Player loser = new SoreLoserPlayer();
+            loser.Name = "Loser";
+
+            try
+            {
+                loser.Play(oneUpper);
+                player1.Play(player2);
+            }
+            catch
+            {
+                Console.WriteLine($"Loser screams at the sky! NOOOOO! I've been defeated!");
+            }
+
+            Console.WriteLine("-------------------");
+
+            Player oneUpper2 = new OneHigherPlayer();
+            oneUpper2.Name = "One Upper2";
+            oneUpper2.Play(loser);
+
+            Console.WriteLine("-------------------");
+
+            Player hiRoller = new UpperHalfPlayer();
+            hiRoller.Name = "High Roller";
+            hiRoller.Play(loser);
+
+            Console.WriteLine("-------------------");
+
+            Player hiRollerLoser = new SoreLoserUpperHalfPlayer();
+            hiRollerLoser.Name = "High Rollin Loser";
+
+            try
+            {
+                hiRollerLoser.Play(hiRoller);
+                player1.Play(player2);
+            }
+            catch
+            {
+                Console.WriteLine($"High Rollin Loser screams at the sky! NOOOOO! I cannot be defeated by the likes of you!");
+            }
+
+            Console.WriteLine("-------------------");
+
             List<Player> players = new List<Player>()
             {
                 player1,
                 player2,
-                player3,
                 large,
                 smack,
                 oneUpper,
                 human,
-                superDBag
+                superDBag,
+                loser,
+                oneUpper2,
+                hiRoller
 
             };
 
@@ -96,7 +134,14 @@ namespace ShootingDice
                 // Make adjacent players play noe another
                 Player player1 = shuffledPlayers[i];
                 Player player2 = shuffledPlayers[i + 1];
-                player1.Play(player2);
+                try
+                {
+                    player1.Play(player2);
+                }
+                catch
+                {
+                    Console.WriteLine($"Loser screams at the sky! NOOOOO! I cannot be defeated!");
+                }
             }
         }
     }
